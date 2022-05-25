@@ -9,6 +9,7 @@ Tag Image: docker tag shoeb:v1 faizul56/shoeb:v1
 Push Image: docker push faizul56/shoeb:v1
 
 **Kubernetes:**
+
 kubectl create deploy hydrus-dev-pod --image=faizul56/shoeb:v1 --port=80 $do > hydrus-dev-pod-deployment.yaml
 k expose deploy hydrus-dev-pod --name hydrus-dev-pod-svc --type=NodePort --port=30035 $do > hydrus-dev-pod-svc
 
