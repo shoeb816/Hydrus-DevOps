@@ -7,11 +7,15 @@ variable "awsprops" {
     publicip = true
     keyname = "myseckey" // this key need to generate manually or use auto generate aws_key_pair named aws-ssh-key
     secgroupname = "IAC-Sec-Group-1"
+    iam_user_key = "AKIxxxxxNXB2BYDxxxxx"
+    ima_secret_key = "xxxxxCia2vjbq4zGxxxxxbOhnacm2QIMgcBxxxxx"
   }
 }
 
 provider "aws" {
   region = lookup(var.awsprops, "region")
+  access_key = lookup(var.awsprops, "iam_user_key")
+  secret_key = lookup(var.awsprops, "ima_secret_key")
 }
 
 resource "aws_key_pair" "ssh-key" {
