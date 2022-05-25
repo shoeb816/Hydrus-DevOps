@@ -18,6 +18,7 @@ Modify with necessary requiremets and combine Two file under **hydrus_app.yaml**
 
 **Terraform:**
 1. Run in Terminal. And also you can configure in terraform file.
+
 $ export AWS_ACCESS_KEY_ID=AK************IEVXQ
 $ export AWS_SECRET_ACCESS_KEY=gbaIbK*********************iwN0dGfS
 2. Create a Directory and write down the following file and save it as main.tf
