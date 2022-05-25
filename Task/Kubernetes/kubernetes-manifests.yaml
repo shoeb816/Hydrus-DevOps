@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  hydrus-dev-pod
+  namespace: hydrus
+  labels:
+    app:  hydrus-dev-pod
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app:  hydrus-dev-pod
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app:  hydrus-dev-pod
+        tier: frontend
+    spec:
+      containers:
+      - name:  hydrus-dev-pod
+        image: faizul56/shoeb:v1
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+        readinessProbe:         
+          initialDelaySeconds: 1
+          periodSeconds: 5
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 1
+          exec:
+            command:
+            - cat
+            - /var/www/html/index.html
+          #tcpSocket:
+          #  host:
+          #  port: 80
+
+        
+        livenessProbe:
+          initialDelaySeconds: 1
+          periodSeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 1
+          #httpGet: 
+          #  path: /
+          #  port: 80
+          exec:
+              command:
+                - curl
+                - -X GET
+                - http://localhost
+
+---    
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: hydrus-dev-pod
+    tier: frontend
+  name: hydrus-dev-pod-svc
+  namespace: hydrus
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30035
+  selector:
+    app: hydrus-dev-pod
+    tier: frontend
+  type: NodePort
+status:
+  loadBalancer: {}
