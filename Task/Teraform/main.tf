@@ -16,7 +16,7 @@ provider "aws" {
 
 resource "aws_key_pair" "ssh-key" {
   key_name   = "aws-ssh-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6xjqIhu0XG2E4e7sfyaV7Yj5Q+3ex+TNSaXayH4zrMF+15WMw/45R9AE/Y+cwH9PEJwv2oCQF1tXgslNmhEMhOc7ScJTB0RY9HN97tvja20hcPqJi43FiGLGZj6VfNsu2f0rTtf3h28xucREUBy+pgaC34SiHbBtun9HGAAInfVhFgD8xm7TgyjfdOB5Ve1d7KAG2vq5KC/LFKkdAF8rfSd/Qa0Urdy/IxN138KWx7SiGGKMZyhjSxtmxgn42COoiihY0xgueft9XhAOKh6zlTstMOJ7khJ4bcqFV3ZzT80h5DbrfN5t33Ew+uxb5UpDsTsrVfiH/oa9rnafirlV/MUpqRf+KwG/0SVmTiLaCJz3Eqo8fWSGI1eMYr+2+JQKD4/xm3LtngEM2+N1jXBnAdecXesblKcgPLhgRS12D3+ZoMHLBSRrfeOVDJhNLUM56lYxfn6GiOrVbHKDCrQuh/zLYf5kErIXeaxOkfK0hHJaA3gsavoPKGp5/WW/EMpQuwkzuy5HIY1eSmgqfKg6dIpX5pXQQRw2RxEe6btpROwMvs3MnMEftHOeU+uBHYAE0uZF0Zzoa4v3V0rnEEBVElMiDVRZGwKCXN+GC//hLwQieGg89nK43BNRzA5Q318TInqg1/EwITqv2bSubA6wsgdTtlAP1oW9Mgx9TZ/0Y2Q== root@devopsrnd.ibcs-primax.com"
+  public_key = "ssh-rsa ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD3F6tyPEFEzV0LX3X8BsXdMsQz1x2cEikKDEY0aIj41qgxMCP/iteneqXSIFZBp5vizPvaoIR3Um9xK7PGoW8giupGn+EPuxIA4cDM4vzOqOkiMPhz5XK0whEjkVzTo4+S0puvDZuwIsdiW9mxhJc7tgBNL0cYlWSYVkz4G/fslNfRPW5mYAM49f4fhtxPb5ok4Q2Lg9dPKVHO/Bgeu5woMc7RY0p1ej6D4CKFE6lymSDJpW0YHX/wqE9+cfEauh7xZcG0q9t2ta6F6fmX0agvpFyZo8aFbXeUBr7osSCJNgvavWbM/06niWrOvYX2xwWdhXmXSrbX8ZbabVohBK41== root@$hostname"
 }
 
 
@@ -70,12 +70,10 @@ resource "aws_instance" "project-iac" {
   tags = {
     Name ="Hydrus Development VM"
     Environment = "DEV"
-    Managed = "IAC"
   }
 
   depends_on = [ aws_security_group.project-iac-sg1 ]
 }
-
 
 output "ec2instance" {
   value = aws_instance.project-iac.public_ip
