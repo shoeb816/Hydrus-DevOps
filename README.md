@@ -17,7 +17,7 @@ kubectl create deploy hydrus-dev-pod --image=faizul56/shoeb:v1 --port=80 $do > h
 
 k expose deploy hydrus-dev-pod --name hydrus-dev-pod-svc --type=NodePort --port=30035 $do > hydrus-dev-pod-svc
 
-Modify with necessary requiremets and combine Two file under **hydrus_app.yaml**
+Modify with necessary requiremets and combine Two file under **kubernetes-manifests.yaml**
 
 
 **Terraform:**
